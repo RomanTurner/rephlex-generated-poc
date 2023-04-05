@@ -9,7 +9,7 @@ module Users
 
         # users/:id/comments
         r.is do
-          "Hello from #{@user.full_name}s comments"
+          phlex_on(Users::Pages::Show.new(user: @user)) 
         end
 
         # users/:id/comments/

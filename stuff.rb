@@ -38,6 +38,10 @@ class Stuff < Roda
       )
     end
 
+    r.post "clicked" do
+      Users::Components::Sidebar.new.call
+    end
+
     inflector = Dry::Inflector.new
     Dir["allocs/*"].each do |file|
       route_name = File.basename(file)

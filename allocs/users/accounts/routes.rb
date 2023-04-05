@@ -1,6 +1,6 @@
 module Users
   module Accounts
-    class Routes < Roda
+    class Routes < Stuff
       route do |r|
         r.root do
           "User Accounts"
