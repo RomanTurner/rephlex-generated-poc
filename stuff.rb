@@ -31,9 +31,9 @@ class Stuff < Roda
   route do |r|
     r.root do
       phlex_on(
-        Shared::Pages::Hello.new(Struct.new(:first_name).new("Frob")),
+        Shared::Pages::CtaHeroCopy.new(Struct.new(:first_name).new("Frob")),
         layout_options: {
-          title: "Phlex Test"
+          title: "Phlexy Test"
         }
       )
     end
