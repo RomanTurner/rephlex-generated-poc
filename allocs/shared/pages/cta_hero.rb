@@ -25,23 +25,54 @@ end
 
 module Shared
   module Pages
-    class Hello < Phlex::HTML
+    class CtaHero < Phlex::HTML
+      STYLES = {
+        hero_container: {
+          xs:
+            "relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl",
+          sm: "rounded-3xl px-16",
+          md: "pt-24",
+          lg: "flex gap-x-20 px-24 pt-0"
+        },
+        header_container: {
+          xs: "mx-auto max-w-md text-center",
+          lg: "mx-0 flex-auto py-32 text-left"
+        },
+        header: {
+          xs: "text-3xl font-bold tracking-tight text-white",
+          sm: "text-4xl"
+        },
+        cta_container: {
+          xs: "mt-10 flex items-center justify-center gap-x-6",
+          lg: "justify-start"
+        },
+        get_started: {
+          xs:
+            "rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm",
+          hover: "bg-gray-100",
+          focus_visible: "outline outline-2 outline-offset-2 outline-white"
+        },
+        page_container: {
+          xs: "mx-auto max-w-7xl py-24",
+          sm: "px-6 py-32",
+          lg: "px-8"
+        }
+      }
+
       def initialize(user)
         @user = user
       end
 
       def template
         div(class: "bg-white") do
-          div(class: "mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8") do
-            hero_body
-          end
+          div(**tw_classes(:page_container)) { hero_body }
         end
       end
 
-      def tw_classes(classes)
+      def tw_classes(klass)
         {
           class:
-            classes
+            STYLES[klass]
               .map do |(k, v)|
                 k == :xs ? v : v.split(" ").map { |el| "#{k}:#{el}" }.join(" ")
               end
@@ -50,25 +81,10 @@ module Shared
       end
 
       def hero_body
-        div(
-          **tw_classes(
-            {
-              xs:
-                "relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl",
-              sm: "rounded-3xl px-16",
-              md: "pt-24",
-              lg: "flex gap-x-20 px-24 pt-0"
-            }
-          )
-        ) do
+        div(**tw_classes(:hero_container)) do
           render TestSVG.new
-          div(
-            class:
-              "mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left"
-          ) do
-            h2(
-              class: "text-3xl font-bold tracking-tight text-white sm:text-4xl"
-            ) do
+          div(**tw_classes(:header_container)) do
+            h2(**tw_classes(:header)) do
               plain "Boost your productivity."
               br
               plain "Start using our app today."
@@ -76,15 +92,8 @@ module Shared
             p(class: "mt-6 text-lg leading-8 text-gray-300") do
               "Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing sagittis vel nulla."
             end
-            div(
-              class:
-                "mt-10 flex items-center justify-center gap-x-6 lg:justify-start"
-            ) do
-              a(
-                href: "#",
-                class:
-                  "rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              ) { "Get started" }
+            div(**tw_classes(:cta_container)) do
+              a(href: "#", **tw_classes(:get_started)) { "Get started" }
               a(
                 href: "#",
                 class: "text-sm font-semibold leading-6 text-white"
