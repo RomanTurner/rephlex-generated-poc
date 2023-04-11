@@ -1,6 +1,6 @@
 module Shared
   module Layout
-    class Homepage < Phlex::HTML
+    class IndexHtml < Phlex::HTML
       attr_accessor :current_head
 
       class Empty < Phlex::HTML

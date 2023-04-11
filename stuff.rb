@@ -26,7 +26,7 @@ class Stuff < Roda
   # Load Custom Plugins
   Dir["system/roda_plugins/*"].each { |route_file| require_relative route_file }
 
-  plugin :rephlex, layout: Shared::Layout::Homepage
+  plugin :rephlex, layout: Shared::Layout::IndexHtml
 
   route do |r|
     r.root do

@@ -1,19 +1,4 @@
-class Rephlexy < Phlex::HTML
-  def grender(&)
-    div(data_component: "#{self.descendants}") { yield }
-  end
-  def tw(klass)
-    styles =
-      self.class::STYLES[klass]
-        .map do |(k, v)|
-          k == :xs ? v : v.split(" ").map { |el| "#{k}:#{el}" }.join(" ")
-        end
-        .join(" ")
-    { class: styles, data_class_name: klass }
-  end
-end
-
-class V1 < Phlex::HTML
+class StyledComponent < Phlex::HTML
   STYLES = {
     container: {
       xs: "mx-auto max-w-7xl px-6 py-24",
@@ -29,13 +14,13 @@ class V1 < Phlex::HTML
     }
   }
 
-  def tw_classes(klass)
+  def tw(klass)
     { class: STYLES[klass].values.join(" ") }
   end
 
   def template
     div(class: "bg-white") do
-      div(**tw_classes(:container)) do
+      div(**tw(:container)) do
         h2(
           class: "text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
         ) do
@@ -44,7 +29,7 @@ class V1 < Phlex::HTML
           plain "Start using our app today."
         end
         div(class: "mt-10 flex items-center gap-x-6") do
-          a(href: "#", **tw_classes(:get_started)) { "Get started" }
+          a(href: "#", **tw(:get_started)) { "Get started" }
           a(
             href: "#",
             class: "text-sm font-semibold leading-6 text-gray-900"
@@ -53,6 +38,7 @@ class V1 < Phlex::HTML
             span(aria_hidden: "true") { " →" }
           end
         end
+        div(class: "element")
       end
     end
   end
@@ -68,7 +54,7 @@ module Shared
       def template
         # render V1.new
         hr
-        render V1.new
+        render StyledComponent.new
       end
     end
   end
