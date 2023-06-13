@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 # This file is responsible for loading all configuration files.
-Dir['providers/*'].each do |file|
-  require_relative file
-end
+Dir["providers/*"].each { |file| require_relative file }
 
-require_relative 'application'
-require_relative 'import'
+require_relative "application"
+require_relative "import"
 
-require 'securerandom'
-require 'dry-validation'
+require "securerandom"
+require "dry-validation"
 
 Application.start(:environment_variables)
 Application.start(:rephlex)
@@ -21,8 +19,10 @@ Application.start(:models)
 Application.finalize!
 
 # Add exsiting Logger instance to DB.loggers collection.
-Application[:database].loggers << Application[:logger]
+if Application[:database].loggers.empty?
+  Application[:database].loggers << Application[:logger]
+end
 
 # Freeze internal data structures for the Database instance.
-require 'pry' if Application.env == 'development'
-Application[:database].freeze unless Application.env == 'development'
+require "pry" if Application.env == "development"
+Application[:database].freeze unless Application.env == "development"

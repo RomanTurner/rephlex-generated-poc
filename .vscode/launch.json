@@ -8,7 +8,7 @@
       "type": "rdbg",
       "name": "Debug current file with rdbg",
       "request": "launch",
-      "script": "${workspaceFolder}/config.ru",
+      "script": "puma",
       "args": [],
       "askParameters": true
     },

@@ -17,7 +17,6 @@ module Users
       r.on Integer do |i|
         @user = Users::DataModel[i]
         r.on "comments" do
-          # REPHLEX-TODO: I tried to use opts but it didn't work. It said that it would be availible to subclasses, but
           opts[:user] = @user
           r.run Comments::Routes
         end

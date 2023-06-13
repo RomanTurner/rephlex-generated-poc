@@ -11,6 +11,7 @@
     "@tiptap/core": "^2.0.2",
     "@tiptap/pm": "^2.0.2",
     "@tiptap/starter-kit": "^2.0.2",
-    "htmx.org": "^1.8.6"
+    "htmx.org": "^1.8.6",
+    "stimulus-dropdown": "^2.1.0"
   }
 }
