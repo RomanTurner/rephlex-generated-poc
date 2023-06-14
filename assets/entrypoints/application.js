@@ -1,7 +1,7 @@
-import.meta.globEager("../../allocs/**/*.js");
-import.meta.globEager("../../allocs/**/*.css");
+import.meta.globEager("../../allocs/**/*.jsm");
+import.meta.globEager("../../allocs/**/*.module.css");
 
-import "~/stylesheets/user.css";
+import "./something.module.css";
 import "./index.css";
 
 import "htmx.org";
