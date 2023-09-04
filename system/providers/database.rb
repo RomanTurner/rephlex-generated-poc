@@ -11,7 +11,9 @@ Application.register_provider(:database) do |_container|
     # Delete DATABASE_URL from the environment, so it isn't accidently passed to subprocesses.
     # DB = Sequel.connect(ENV.delete('DATABASE_URL'))
     DB = Sequel.connect(Application[:db_config])
-
+    # Check to see if there are outstanding migrations
+    # Sequel.extension :migration
+    # Sequel::Migrator.check_current(DB, '/path/to/migrations')
     # Register database component.
     register(:database, DB)
   end

@@ -2,16 +2,13 @@
 
 require "roda"
 require "dry/inflector"
-
+require "debug"
 ## Rack entry point, and main host for all
 # and configuration point for Roda plugins.
 class Stuff < Roda
   plugin :environments
 
-  configure :development, :production do
-    # A powerful logger for Roda with a few tricks up it's sleeve.
-    plugin :enhanced_logger
-  end
+  plugin :enhanced_logger
 
   # Allows modifying the default headers for responses.
   plugin :default_headers,

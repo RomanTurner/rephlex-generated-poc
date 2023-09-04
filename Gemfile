@@ -30,11 +30,15 @@ gem 'vite_ruby'
 gem 'phlex'
 gem 'dry-validation'
 
+
+gem "rake", "~> 13.0"
+
 group :development, :test do
   gem 'pry'
   gem 'ruby-lsp', '~> 0.3.8', :group => :development
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-
+  gem 'minitest'
+  gem "phlex-testing-nokogiri"
   # This gem has to be here for running bundler in debug/vscode
   # https://marketplace.visualstudio.com/items?itemName=castwide.ruby-debug
   gem 'readapt'
